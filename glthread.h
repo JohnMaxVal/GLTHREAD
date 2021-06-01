@@ -16,8 +16,8 @@ typedef unsigned int uint32;
 #define ITERATE_GLTHREAD_END }}
 
 #define glthread_node_default_init(glnode)\
-  glnode->right = NULL;\
-  glnode->left = NULL;
+  glnode->left = NULL;\
+  glnode->right = NULL;
 
 typedef struct glthread_node_ {
   struct glthread_node_* left;

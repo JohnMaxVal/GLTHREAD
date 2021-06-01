@@ -11,39 +11,28 @@ void
 glthread_add(glthread* glthread, glthread_node* node) {
   if(glthread == NULL || node == NULL)
     return;
-
-  glthread_node_default_init(node);
   
-  glthread_node* head = glthread->head;
+  glthread_node** head = &glthread->head;
   
-  if(head == NULL) {
-    head = node;
+  if(*head == NULL) {
+    *head = node;
     return;
   }
 
-  if(head->right == NULL) { // the second node
-    head->right = node;
-    node->left = head;
+  if((*head)->right == NULL) { // the second node
+    (*head)->right = node;
+    node->left = *head;
     return;
   }
 
-  glthread_node* tmp = head->right;
-  head->right = node;
-  node->left = head;
+  glthread_node* tmp = (*head)->right;
+  (*head)->right = node;
+  node->left = *head;
   node->right = tmp;
   tmp->left = node;
-
-  glthread->head = node;
 }
 
-/* static void */
-/* _glthread_add_next(glthread_node* curr, glthread_node* new) { */
+void
+glthread_remove(glthread* thread, glthread_node* node) {
   
-/* } */
-
-/* static void */
-/* _glthread_add_last(glthread_node* curr, glthread_node* new) { */
-/*   glthread_node* tmp = curr; */
-
-/*   ITERATE_GLTHREAD_BEGIN( */
-/* } */
+}

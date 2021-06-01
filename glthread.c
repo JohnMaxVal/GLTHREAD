@@ -34,5 +34,26 @@ glthread_add(glthread* glthread, glthread_node* node) {
 
 void
 glthread_remove(glthread* thread, glthread_node* node) {
-  
+  if(thread == NULL || node == NULL)
+    return;
+
+  glthread_node** head = &thread->head;
+
+  if(*head == node) {
+    *head = (*head)->right;
+    return;
+  }
+
+  if(node->right == NULL) {
+    node->left->right = NULL;
+    node->left = NULL;
+    free(node);
+    return;
+  }
+
+  node->left->right = node->right;
+  node->right->left = node->left;
+  node->right = NULL;
+  node->left = NULL;
+  free(node);
 }
